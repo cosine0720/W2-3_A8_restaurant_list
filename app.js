@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant')
 
 const app = express()
@@ -23,11 +24,13 @@ app.set('view engine', 'hbs')
 // setting static files
 app.use(express.static('public')) // 使用css靜態檔案！！！
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 // 首頁
 app.get('/', (req, res) => {
   Restaurant.find({})
     .lean()
+    .sort({ _id: 'asc' })
     .then(restaurantsData => res.render("index", { restaurantsData }))
     .catch(err => console.log(err))
 })
@@ -85,14 +88,15 @@ app.get("/restaurants/:restaurantId/edit", (req, res) => {
     .catch(err => console.log(err))
 })
 
-app.post('/restaurants/:restaurantId/edit', (req, res) => {
+app.put('/restaurants/:restaurantId', (req, res) => {
   const { restaurantId } = req.params
   Restaurant.findByIdAndUpdate(restaurantId, req.body)
     .then(() => res.redirect(`/restaurants/${restaurantId}`))
     .catch(err => console.log(err))
 })
+
 // 刪除特定餐廳
-app.post('/restaurants/:restaurantId/delete', (req, res) => {
+app.delete('/restaurants/:restaurantId', (req, res) => {
   const { restaurantId } = req.params
   return Restaurant.findByIdAndDelete(restaurantId)
     .then(() => res.redirect('/'))
