@@ -5,10 +5,10 @@
       <form action="/search">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value="{{keyword}}" aria-describedby="search-button">
+          <input type="text" name="keywords" class="form-control" placeholder="輸入餐廳、分類" value="{{keywords}}"
+            aria-label="Restaurant Name..." value="" aria-describedby="search-button">
           <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            <button class="btn btn-warning" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
         </div>
       </form>
@@ -16,10 +16,15 @@
   </div>
 </div>
 
+<!-- 新增餐廳 -->
+<div class="text-left mx-3">
+  <a href="/restaurants/new"><button class="btn btn-outline-danger rounded-pill mx-5 btn-lg">📝新增 </button></a>
+</div>
+
 <!-- restaurant list -->
 <div class="container mt-5 px-md-5">
   <div class="row">
-    {{#each restaurants}}
+    {{#each restaurantsData}}
     <div class="col-12 col-sm-6 col-md-4">
       <a href="/restaurants/{{this.id}}" class="text-secondary">
         <div class="card mb-3">
@@ -36,6 +41,13 @@
               {{this.rating}}
               <i class="fas fa-star fa-xs"></i>
             </span>
+          </div>
+          <div class="card-footer d-flex justify-content-end flex-wrap">
+            <a href="/restaurants/{{this._id}}/edit"><button class="btn btn-outline-info text-gray btn-sm mr-1">編輯</button></a>
+            <a href="/restaurants/{{this._id}}"><button class="btn btn-outline-info text-gray btn-sm mr-1">詳細</button></a>
+            <form action="/restaurants/{{this._id}}/delete" method="POST">
+              <button type="submit" class="btn btn-outline-warning  btn-sm text-white">刪除</button>
+            </form>
           </div>
         </div>
       </a>
