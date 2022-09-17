@@ -37,13 +37,6 @@
    ctrl + c
    ```
 
-## 開發工具
-- Node.js 16.15.0
-- Express 4.16.4
-- Express-Handlebars 3.0.0
-- Bootstrap 4.3.1
-- Font-awesome 5.8.1
-- body-parser
 
 ## 開發工具
 
