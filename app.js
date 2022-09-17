@@ -1,5 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const restaurantList = require('./restaurant.json')
 
 const port = 3000
 const app = express()
@@ -11,7 +12,7 @@ app.set('view engine', 'hbs')
 app.use(express.static('public')) // 使用css靜態檔案！！！
 
 app.get('/',(req, res) => {
-  res.render('index')
+  res.render('index', { restaurants: restaurantList.results })
 })
 
 app.listen(port,() => {
