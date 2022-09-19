@@ -2,7 +2,6 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-const Restaurant = require('./models/restaurant')
 
 const routes = require('./routes')
 require('./config/mongoose')
@@ -19,7 +18,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(routes)
 
-
-app.listen(port,() => {
+app.listen(port, () => {
   console.log(`This app is opening on http://localhost:${port}`)
 })
