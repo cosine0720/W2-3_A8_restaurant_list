@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 // 搜尋功能
 router.get('/search', (req, res) => {
   if (!req.query.keywords) {
-    res.redirect('/')
+    return res.redirect('/')
   }
 
   // 搜尋餐廳名稱關鍵字 || 餐廳種類關鍵字
